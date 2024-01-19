@@ -20,14 +20,3 @@ jobs:
       - name: Run htmlhint
         run: npx htmlhint ./*.html
 
-  deploy:
-    needs: lint-html
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
